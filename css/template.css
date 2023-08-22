@@ -351,12 +351,26 @@ template {
 }
 
 /* Main Menu */
-.menu-area {
+header {
   background: #fff;
   -webkit-box-shadow: rgba(0, 0, 0, 0.09) 1px 10px 10px 1px;
           box-shadow: rgba(0, 0, 0, 0.09) 1px 10px 10px 1px;
 }
-.menu-area .main-menu {
+
+.top-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 1440px;
+  margin: auto;
+}
+.top-bar .main-menu {
   height: 80px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -368,38 +382,30 @@ template {
       -ms-flex-align: center;
           align-items: center;
 }
-.menu-area .main-menu ul {
+.top-bar .main-menu ul {
   margin: 0;
   padding-left: 0;
 }
-.menu-area .main-menu ul li {
+.top-bar .main-menu ul li {
   display: inline-block;
   line-height: 55px;
   position: relative;
-  padding: 12px 10px;
-  letter-spacing: 0.5px;
 }
-.menu-area .main-menu ul li:hover {
-  font-weight: 700;
-  padding: 12px 10px;
-  letter-spacing: 0;
-}
-.menu-area .main-menu ul li.current_page_item > a {
+.top-bar .main-menu ul li.current_page_item > a {
   font-weight: bold;
 }
-.menu-area .main-menu ul li .main-menu ul li a {
-  color: #000000;
-  padding: 0 30px;
+.top-bar .main-menu ul li a {
+  color: #000;
+  padding: 0 22px;
   text-decoration: none;
   display: block;
 }
-.menu-area .main-menu ul li .main-menu ul li a:hover, .menu-area .main-menu ul li .main-menu ul li a:active {
-  color: var(--wpdevs-gray1);
+.top-bar .main-menu ul li a:hover, .top-bar .main-menu ul li a:active {
+  color: red;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
-  padding: 0 30px;
 }
-.menu-area .main-menu ul li .main-menu ul li a:focus + ul {
+.top-bar .main-menu ul li a:focus + ul {
   display: block;
 }
 
@@ -420,6 +426,16 @@ template {
   transition: 0.4s;
 }
 
+.custom-logo {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.custom-logo a {
+  color: red;
+  text-decoration: none;
+}
+
+/* Variables de couleur */
 @font-face {
   font-family: "SpaceMono-Regular";
   src: url(../fonts/SpaceMono-Regular.ttf);

@@ -1,8 +1,15 @@
 /* Main Menu */
-
-.menu-area {
+header {
+    // background: $color-white;
     background: #fff;
     box-shadow: rgb(0 0 0 / 9%) 1px 10px 10px 1px;
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1440px;
+    margin: auto;
     .main-menu {
       height: 80px;
       display: flex;
@@ -15,26 +22,20 @@
           display: inline-block;
           line-height: 55px;
           position: relative;
-          padding: 12px 10px;
-          letter-spacing: 0.5px;
-            &:hover {
-            font-weight: 700;
-            padding: 12px 10px;
-            letter-spacing: 0;
-            }
             &.current_page_item>a {
                 font-weight: bold;
             }
-            .main-menu ul li a {
-            color: #000000;
-            padding: 0 30px;
+            a {
+            // color: $color-black;
+            color: #000;
+            padding: 0 22px;
             text-decoration: none;
             display: block;
                 &:hover,
                 &:active {
-                color: var(--wpdevs-gray1);
+                // color: $color-main;
+                color: red;
                 transition: .5s all;
-                padding: 0 30px;
                 }
                 &:focus+ul {
                   display: block;
@@ -60,4 +61,14 @@
         margin: 5px 0;
         transition: 0.4s;
     }     
+}
+
+// without logo
+.custom-logo {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    a {
+        color: red;
+        text-decoration: none;
+    }
 }
