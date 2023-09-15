@@ -1,0 +1,33 @@
+.page-item {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    margin: 20px 54px 0 54px;
+    @include bp-min-computer {
+        margin: 0;
+        align-items: end;
+        flex-direction: row;
+    } 
+    .page-description {
+        border-bottom: 1px solid #000;
+        width: 100%;
+        max-width: 100%;
+        @include bp-min-computer {
+            max-width: 50%;
+        }
+    }
+    .page-title {
+        max-width: 420px;
+        font-size: 4.125rem;
+        font-style: italic;
+        text-transform: uppercase;
+    }
+    p {
+        font-size: .875rem;
+        margin-bottom: 20px;
+    }
+}
+.section-contact {
+    display: flex;
+}

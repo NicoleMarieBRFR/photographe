@@ -1,4 +1,5 @@
 <footer class="site-footer">
+    <?php get_template_part('templates_part/popup-contact'); ?>
             <div class="container">
                 <div class="menu-footer">
                     <nav class="main-menu">

@@ -26,3 +26,22 @@ function photographe_config(){
     ) );
 }
 add_action( 'after_setup_theme', 'photographe_config', 0 );
+
+// last link menu
+add_filter( 'wp_nav_menu_items', 'prefix_add_menu_item', 10, 2 );
+function prefix_add_menu_item ( $items, $args ) {
+   if($args->theme_location == 'photographe_main_menu') {
+       $items_array = array();
+               while ( false !== ( $item_pos = strpos ( $items, '<li', 10 ) ) ) // Add the position where the menu item is placed
+               {
+                   $items_array[] = substr($items, 0, $item_pos);
+                   $items = substr($items, $item_pos);
+               }
+               $items_array[] = $items;
+               array_splice($items_array, 2, 0, '<li><a class="cd-popup-trigger">Contact</a></li>'); // insert custom item after 1
+       
+               $items = implode('', $items_array);
+            }  
+              
+              return $items;
+}

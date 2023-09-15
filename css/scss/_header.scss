@@ -1,15 +1,16 @@
 /* Main Menu */
-header {
-    // background: $color-white;
+.gp-main-menu {
     background: #fff;
     box-shadow: rgb(0 0 0 / 9%) 1px 10px 10px 1px;
+    position: fixed;
+    width: 100%; 
 }
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1440px;
     margin: auto;
+    max-width: 1440px;
     .main-menu {
       height: 80px;
       display: flex;
@@ -26,8 +27,8 @@ header {
                 font-weight: bold;
             }
             a {
-            // color: $color-black;
-            color: #000;
+            color: $color-black;
+            // color: #000;
             padding: 0 22px;
             text-decoration: none;
             display: block;
@@ -71,5 +72,113 @@ header {
         color: red;
         text-decoration: none;
         font-weight: 900;
+    }
+}
+
+//popup
+.cd-popup-trigger {
+    cursor: pointer;
+}
+.cd-popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0 0 0 / 80%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    &.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s 0s, visibility 0s 0s;
+    }
+}
+.cd-popup-container {
+    position: relative;
+    border: 5px solid #000;
+    width: 90%;
+    top: 10%;
+    max-width: 597px;
+    margin: auto;
+    background: #FFF;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-40px);
+    -webkit-backface-visibility: hidden;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    img {        
+    padding: 18px 0 20px 0;
+    }
+    a {
+        &.cd-popup-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 30px;
+            height: 30px;
+            &:before, &:after {
+                content: '';
+                position: absolute;
+                top: 12px;
+                width: 14px;
+                height: 3px;
+                background-color: #8f9cb5;
+            }
+            &:before {
+                transform: rotate(45deg);
+                left: 8px;
+            }
+            &:after {
+                transform: rotate(-45deg);
+                right: 8px;
+            }
+        }
+        &.img-replace {
+            display: inline-block;
+            overflow: hidden;
+            text-indent: 100%;
+            color: transparent;
+            white-space: nowrap;
+        }
+    }
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        p {
+            max-width: 263px;
+            width: 100%;
+        }
+        textarea {
+            max-width: 263px;
+            border: 1px solid #B8BBC2;
+            border-radius: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            background-color: #D8D8D8;
+            &:hover {
+                background-color: #000;
+                color: #fff;
+            }
+        }
+        label {
+            text-transform: uppercase;
+            input  {
+                max-width: 235px;
+                background-color: transparent;
+                border: 1px solid #B8BBC2;
+                border-radius: 8px;
+                &:hover {
+                    background-color: transparent;
+                }
+            }
+        }
     }
 }

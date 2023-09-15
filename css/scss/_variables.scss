@@ -1,10 +1,17 @@
 /* Variables de couleur */
 // $color-main: #E00000;
 // $color-white: #fff;
-// $color-black: #000;
+$color-black: #000;
 
 // Font face
 @font-face  {
     font-family: 'SpaceMono-Regular';
     src: url(../fonts/SpaceMono-Regular.ttf);
 }
+
+/* Grille sémantic ui */
+$mobile-breakpoint				: 36rem; /*576px*/
+$tablet-breakpoint				: 48rem; /*768px*/
+$computer-breakpoint			: 62rem; /*992px*/
+$large-monitor-breakpoint		: 75rem; /*1200px*/
+$widescreen-monitor-breakpoint	: 99rem; /*1584px*/
