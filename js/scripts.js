@@ -1,3 +1,8 @@
+//Onclick bouton contact
+function go(reference){
+	document.getElementById('ref_field').setAttribute('value', reference);
+}
+
 jQuery(document).ready(function(jQuery){
 	//open popup
 	jQuery('.cd-popup-trigger').on('click', function(event){

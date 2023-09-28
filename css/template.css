@@ -692,8 +692,69 @@ main #content-hero {
   margin-bottom: 20px;
 }
 
-.section-contact {
+.page-single-photo .section-contact {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 20px 54px 0 54px;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo .section-contact {
+    margin: 0;
+  }
+}
+.page-single-photo .section-contact .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 15px 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  width: 100%;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo .section-contact .item {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+.page-single-photo .section-contact .item button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  background-color: #D8D8D8;
+  max-width: 100%;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo .section-contact .item button {
+    max-width: 272px;
+  }
+}
+.page-single-photo .section-contact .item button:hover {
+  background-color: #000;
+  color: #fff;
+}
+.page-single-photo .section-contact .item .previous img, .page-single-photo .section-contact .item .next img {
+  display: none;
+}
+.page-single-photo .section-contact .item .previous a:hover img, .page-single-photo .section-contact .item .next a:hover img {
+  display: block;
+  width: 100%;
+  max-width: 81px;
+  max-height: 71px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }

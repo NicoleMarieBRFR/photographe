@@ -28,6 +28,54 @@
         margin-bottom: 20px;
     }
 }
-.section-contact {
-    display: flex;
+.page-single-photo {
+    .section-contact {
+        display: flex;
+        margin: 20px 54px 0 54px;
+        @include bp-min-computer {
+            margin: 0;
+        }
+        .item {
+            display: flex;
+            margin: 15px 0;
+            justify-content: space-between;
+            flex-direction: column;
+            flex: none;
+            width: 100%;
+            @include bp-min-computer {
+                flex: 1;
+                flex-direction: row;
+            }
+            button {
+                width: 100%;
+                padding: 16px;
+                border: none;
+                background-color: #D8D8D8;
+                max-width: 100%;
+                @include bp-min-computer {
+                    max-width: 272px;
+                }
+                &:hover {
+                    background-color: #000;
+                    color: #fff;
+                }
+            }
+            .previous, .next {
+                img { 
+                    display: none;
+                }
+                a {
+                    &:hover {
+                        img {
+                            display: block;
+                            width: 100%;
+                            max-width: 81px;
+                            max-height: 71px;
+                            object-fit: cover;
+                        }
+                    }
+                }
+            }            
+        }
+    }
 }
