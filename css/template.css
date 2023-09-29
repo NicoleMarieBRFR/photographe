@@ -393,6 +393,7 @@ template {
           align-items: center;
   margin: auto;
   max-width: 1440px;
+  z-index: 1000;
 }
 .top-bar .main-menu {
   height: 80px;
@@ -586,6 +587,27 @@ template {
   background-color: transparent;
 }
 
+#menu-footer-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media only screen and (min-width: 62rem) {
+  #menu-footer-menu {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
 .hero-items {
   color: transparent;
   text-transform: uppercase;
@@ -643,6 +665,23 @@ main #content-hero {
   color: red;
 }
 
+.button_style {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  background-color: #D8D8D8;
+  max-width: 100%;
+}
+@media only screen and (min-width: 62rem) {
+  .button_style {
+    max-width: 272px;
+  }
+}
+.button_style:hover {
+  background-color: #000;
+  color: #fff;
+}
+
 .page-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -657,7 +696,7 @@ main #content-hero {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  margin: 20px 54px 0 54px;
+  margin: 20px 0 0 0;
 }
 @media only screen and (min-width: 62rem) {
   .page-item {
@@ -705,6 +744,7 @@ main #content-hero {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  z-index: 1;
 }
 @media only screen and (min-width: 62rem) {
   .page-single-photo .section-contact {
@@ -736,22 +776,6 @@ main #content-hero {
         -ms-flex-direction: row;
             flex-direction: row;
   }
-}
-.page-single-photo .section-contact .item button {
-  width: 100%;
-  padding: 16px;
-  border: none;
-  background-color: #D8D8D8;
-  max-width: 100%;
-}
-@media only screen and (min-width: 62rem) {
-  .page-single-photo .section-contact .item button {
-    max-width: 272px;
-  }
-}
-.page-single-photo .section-contact .item button:hover {
-  background-color: #000;
-  color: #fff;
 }
 .page-single-photo .section-contact .item .previous img, .page-single-photo .section-contact .item .next img {
   display: none;
@@ -789,5 +813,89 @@ main #content-hero {
   }
   .page-single-photo .section-contact .sec a:hover img {
     left: 0;
+  }
+}
+.page-single-photo #related {
+  border-top: 1px solid #000;
+}
+.page-single-photo #related .related-post {
+  margin: 0 29px;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo #related .related-post {
+    margin: 52px 0;
+  }
+}
+.page-single-photo #related .related-post ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style-type: none;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo #related .related-post ul {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+.page-single-photo #related .related-post ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.page-single-photo #related .related-post ul li img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 590px;
+  max-width: 100%;
+}
+.page-single-photo #related .related-post ul li:first-child {
+  margin-right: 0;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo #related .related-post ul li:first-child {
+    margin-right: 10px;
+  }
+}
+.page-single-photo #related .related-post ul li:last-child {
+  margin-left: 0;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo #related .related-post ul li:last-child {
+    margin-left: 10px;
+  }
+}
+.page-single-photo #related .related_button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 64px;
+}
+
+.m-rp {
+  padding-left: 54px;
+  padding-right: 54px;
+}
+@media only screen and (min-width: 62rem) {
+  .m-rp {
+    padding-left: 0;
+    padding-right: 0;
   }
 }

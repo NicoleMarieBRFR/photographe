@@ -3,7 +3,7 @@
     justify-content: space-between;
     flex-direction: column-reverse;
     align-items: flex-start;
-    margin: 20px 54px 0 54px;
+    margin: 20px 0 0 0;
     @include bp-min-computer {
         margin: 0;
         align-items: end;
@@ -35,6 +35,7 @@
         justify-content: space-between;
         width: 100%;
         flex-direction: column;
+        z-index: 1;
         @include bp-min-computer {
             flex-direction: row;
             margin: 0;
@@ -47,20 +48,6 @@
             width: 100%;
             @include bp-min-computer {
                 flex-direction: row;
-            }
-            button {
-                width: 100%;
-                padding: 16px;
-                border: none;
-                background-color: #D8D8D8;
-                max-width: 100%;
-                @include bp-min-computer {
-                    max-width: 272px;
-                }
-                &:hover {
-                    background-color: #000;
-                    color: #fff;
-                }
             }
             .previous, .next {
                 img { 
@@ -104,5 +91,58 @@
                 }
             }
         }
+    }
+    #related {
+        border-top: 1px solid #000;
+        .related-post {
+            margin: 0 29px;
+            @include bp-min-computer {
+                margin: 52px 0;
+            }
+            ul {
+                display: flex;
+                list-style-type: none;
+                justify-content: space-between;
+                padding: 0;
+                flex-direction: column;
+                @include bp-min-computer {
+                    flex-direction: row;
+                }
+                 li {
+                    display: flex;
+                    flex-direction: column;
+                    img {
+                        object-fit: cover;
+                        height: 590px;
+                        max-width: 100%;
+                    }
+                    &:first-child {
+                        margin-right: 0;
+                        @include bp-min-computer {
+                            margin-right: 10px;
+                        }
+                    }
+                    &:last-child {
+                        margin-left: 0;
+                        @include bp-min-computer {
+                            margin-left: 10px;
+                        }
+                    }
+                 }
+            }
+        }
+        .related_button {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 64px;
+        }
+    }
+}
+.m-rp {
+    padding-left: 54px;
+    padding-right: 54px;
+    @include bp-min-computer {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

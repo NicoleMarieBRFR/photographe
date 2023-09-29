@@ -11,6 +11,7 @@
     align-items: center;
     margin: auto;
     max-width: 1440px;
+    z-index: 1000;
     .main-menu {
       height: 80px;
       display: flex;
@@ -180,5 +181,15 @@
                 }
             }
         }
+    }
+}
+
+// footer 
+#menu-footer-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include bp-min-computer {
+        flex-direction: row;
     }
 }

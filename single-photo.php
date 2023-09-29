@@ -17,12 +17,12 @@
                         <div class="page-item">
                             <?php while (have_posts()) : the_post(); ?>
                             <div class="page-description">
-                                <h2 class="page-title">
+                                <h2 class="page-title m-rp">
                                     <?php 
                                         echo single_post_title();
                                     ?>
                                 </h2>
-                                <div>
+                                <div class="m-rp">
                                     <p>Référence : <?php echo esc_html( get_field('Référence') ); ?></p>
                                     <p>Categorie : <?php echo get_the_terms( get_the_ID(), 'categorie', false )[0]->name; ?></p>
                                     <p>Format : <?php echo get_the_terms( get_the_ID(), 'format', false )[0]->name; ?></p>
@@ -31,26 +31,23 @@
                                 </div>
                             </div>
                             <?php endwhile; ?>
-                            <div class="page-img">
+                            <div class="page-img m-rp">
                                 <?php the_content(); ?>                             
                             </div>
                         </div>
                         <section class="section-contact">
                             <div class="item first">
                                 <h3>Cette photo vous intéresse ?</h3>
-                                <button onClick="go('<?php echo esc_html( get_field('Référence')); ?>');" class="cd-popup-trigger">Contact</button>
+                                <button onClick="go('<?php echo esc_html( get_field('Référence')); ?>');" class="cd-popup-trigger button_style">Contact</button>
                             </div>
                             <div class="item sec">
                                 <div class="previous">
                                     <?php
                                         $prev_post = get_previous_post();
-
                                         $prev_post_id = $prev_post ? $prev_post->ID : 0;
                                         $prev_post_thumbnail = get_the_post_thumbnail_url($prev_post_id, 'thumbnail');
                                         
                                         if ( ! empty( $prev_post ) ): ?>
-
-
                                             <a href="<?php echo get_permalink( $prev_post->ID ); ?>">
                                                 <img src="<?php echo $prev_post_thumbnail; ?>" alt="<?php the_title_attribute(); ?>" />
                                                 <svg width="26" height="8" viewBox="0 0 26 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +63,6 @@
                                         $next_post_thumbnail = get_the_post_thumbnail_url($next_post_id, 'thumbnail');
 
                                         if ( ! empty( $next_post ) ): ?>
-                                                <?php echo $thumb ?>
                                             <a href="<?php echo get_permalink( $next_post->ID ); ?>">
                                             <img src="<?php echo $next_post_thumbnail; ?>" alt="<?php the_title_attribute(); ?>" />
                                             <svg width="26" height="8" viewBox="0 0 26 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,37 +73,51 @@
                                 </div>
                             </div>
                         </section>
-                        <section>
-                            <h2> Vous aimerez aussi </h2>
-                            <div>
+                        <section id="related">
+                            <h2 class="m-rp"> Vous aimerez aussi </h2>
+                            <div class="related-post">
                             <?php
+                                $category_slug = get_the_terms( get_the_ID(), 'categorie', false )[0]->slug; // Whatever the category ID is for your aerial category
                                 $loop = new WP_Query( array( 
-                                    'post_type' => 'photo', 
-                                    'category_name' => get_the_terms( get_the_ID(), 'categorie', false )[0]->name, // Whatever the category ID is for your aerial category
+                                    'post_type' => 'photo',
+                                    'tax_query' => array(
+                                        array(
+                                            'taxonomy' => 'categorie', // Remplacez 'votre_taxonomie' par le nom de votre taxonomie personnalisée
+                                            'field' => 'slug', // Vous pouvez utiliser 'id', 'slug' ou 'name' pour le champ
+                                            'terms' => $category_slug, // Remplacez 'votre_terme' par le terme que vous souhaitez cibler
+                                        ),
+                                    ),
                                     'posts_per_page' =>  2,
                                     'orderby' => 'date', // Purely optional - just for some ordering
                                     'order' => 'DESC' // Ditto
                                 ) );
+                                
 
                                 // The Loop.
                                 if ( $loop->have_posts() ) {
                                     echo '<ul>';
                                     while ( $loop->have_posts() ) {
-                                        $loop->the_post();
-                                        echo '<li>' . esc_html( get_the_title() ) . '</li>';
+                                        $loop->the_post(); 
+                                        echo '<li>';
+                                        if (has_post_thumbnail()) {
+                                            // Affichez l'image en vedette
+                                            the_post_thumbnail(); // Vous pouvez remplacer 'thumbnail' par la taille d'image souhaitée
+                                        }
+                                        echo '<a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a>';
+                                        echo '</li>';
                                     }
                                     echo '</ul>';
                                 } else {
-                                    esc_html_e( 'Sorry, no posts matched your criteria.' );
+                                    esc_html_e( 'Aucun article correspondant trouvé.' );
                                 }
 
-                                while ( $loop->have_posts() ) : 
-                                    $loop->the_post();
-                                endwhile; 
-                            ?>
+                                wp_reset_postdata();
+                                ?>
 
                             </div>
-                            
+                            <div class="related_button m-rp">
+                                <button class="button_style">Toute les photos</button>
+                            </div>                         
                         </section>
                     </article>
                 </main>

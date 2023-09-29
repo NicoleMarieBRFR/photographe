@@ -43,3 +43,18 @@ main {
         }
     }
 }
+
+.button_style {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    background-color: #D8D8D8;
+    max-width: 100%;
+    @include bp-min-computer {
+        max-width: 272px;
+    }
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+}
