@@ -697,9 +697,21 @@ main #content-hero {
   display: -ms-flexbox;
   display: flex;
   margin: 20px 54px 0 54px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 @media only screen and (min-width: 62rem) {
   .page-single-photo .section-contact {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     margin: 0;
   }
 }
@@ -715,16 +727,10 @@ main #content-hero {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-flex: 0;
-      -ms-flex: none;
-          flex: none;
   width: 100%;
 }
 @media only screen and (min-width: 62rem) {
   .page-single-photo .section-contact .item {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
@@ -757,4 +763,31 @@ main #content-hero {
   max-height: 71px;
   -o-object-fit: cover;
      object-fit: cover;
+  position: absolute;
+  bottom: 100%;
+}
+.page-single-photo .section-contact .first {
+  max-width: 81%;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo .section-contact .first {
+    max-width: 50%;
+  }
+}
+.page-single-photo .section-contact .sec {
+  display: none;
+}
+@media only screen and (min-width: 62rem) {
+  .page-single-photo .section-contact .sec {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    right: 0;
+    max-width: 81px;
+    top: 52px;
+  }
+  .page-single-photo .section-contact .sec a:hover img {
+    left: 0;
+  }
 }

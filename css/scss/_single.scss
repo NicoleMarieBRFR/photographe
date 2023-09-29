@@ -32,7 +32,11 @@
     .section-contact {
         display: flex;
         margin: 20px 54px 0 54px;
+        justify-content: space-between;
+        width: 100%;
+        flex-direction: column;
         @include bp-min-computer {
+            flex-direction: row;
             margin: 0;
         }
         .item {
@@ -40,10 +44,8 @@
             margin: 15px 0;
             justify-content: space-between;
             flex-direction: column;
-            flex: none;
             width: 100%;
             @include bp-min-computer {
-                flex: 1;
                 flex-direction: row;
             }
             button {
@@ -72,10 +74,35 @@
                             max-width: 81px;
                             max-height: 71px;
                             object-fit: cover;
+                            position: absolute;
+                            bottom: 100%;
                         }
                     }
                 }
             }            
+        }
+        .first {
+            max-width: 81%;
+            @include bp-min-computer {
+                max-width: 50%;
+            }
+        }
+        .sec {
+            display: none;
+            @include bp-min-computer {
+                display: flex;
+                position: relative;
+                right: 0;
+                max-width: 81px;
+                top: 52px;
+                a {
+                    &:hover {
+                        img {
+                            left: 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }

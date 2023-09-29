@@ -36,38 +36,42 @@
                             </div>
                         </div>
                         <section class="section-contact">
-                            <div class="item">
+                            <div class="item first">
                                 <h3>Cette photo vous intéresse ?</h3>
                                 <button onClick="go('<?php echo esc_html( get_field('Référence')); ?>');" class="cd-popup-trigger">Contact</button>
                             </div>
-                            <div class="item">
+                            <div class="item sec">
                                 <div class="previous">
                                     <?php
                                         $prev_post = get_previous_post();
-                                        $next_post = get_next_post();
-                                        // $id = get_post_thumbnail_id();
-                                        // $thumb = get_the_post_thumbnail( $id, 'post-thumbnail' );
-                                        $thumbnailUrl = get_the_post_thumbnail_url($prev_post->ID, "thumbnail");
-                                        $image_html = get_the_post_thumbnail_url(get_the_ID(),'full'); // affiche seulemment le lien
+
+                                        $prev_post_id = $prev_post ? $prev_post->ID : 0;
+                                        $prev_post_thumbnail = get_the_post_thumbnail_url($prev_post_id, 'thumbnail');
                                         
                                         if ( ! empty( $prev_post ) ): ?>
-                                            <?php echo apply_filters( 'the_title', $prev_post->post_title ); ?>
-                                            <?php echo apply_filters( 'post_thumbnail_html', $prev_post->ID ); ?>
 
 
                                             <a href="<?php echo get_permalink( $prev_post->ID ); ?>">
-                                                <img src="<?php echo the_post_thumbnail_url($prev_post->ID); ?>" alt="<?php the_title_attribute(); ?>" />
-                                            <
+                                                <img src="<?php echo $prev_post_thumbnail; ?>" alt="<?php the_title_attribute(); ?>" />
+                                                <svg width="26" height="8" viewBox="0 0 26 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.646447 3.64645C0.451184 3.84171 0.451184 4.15829 0.646447 4.35355L3.82843 7.53553C4.02369 7.7308 4.34027 7.7308 4.53553 7.53553C4.7308 7.34027 4.7308 7.02369 4.53553 6.82843L1.70711 4L4.53553 1.17157C4.7308 0.976311 4.7308 0.659728 4.53553 0.464466C4.34027 0.269204 4.02369 0.269204 3.82843 0.464466L0.646447 3.64645ZM1 4.5H26V3.5H1V4.5Z" fill="black"/>
+                                                </svg>
                                             </a>
                                     <?php endif; ?>
                                 </div>
                                 <div class="next">
                                     <?php
+                                        $next_post = get_next_post();
+                                        $next_post_id = $next_post ? $next_post->ID : 0;
+                                        $next_post_thumbnail = get_the_post_thumbnail_url($next_post_id, 'thumbnail');
+
                                         if ( ! empty( $next_post ) ): ?>
-                                                <?php echo apply_filters( 'the_title', $next_post->post_title ); ?>
                                                 <?php echo $thumb ?>
                                             <a href="<?php echo get_permalink( $next_post->ID ); ?>">
-                                            >
+                                            <img src="<?php echo $next_post_thumbnail; ?>" alt="<?php the_title_attribute(); ?>" />
+                                            <svg width="26" height="8" viewBox="0 0 26 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M25.3536 3.64645C25.5488 3.84171 25.5488 4.15829 25.3536 4.35355L22.1716 7.53553C21.9763 7.7308 21.6597 7.7308 21.4645 7.53553C21.2692 7.34027 21.2692 7.02369 21.4645 6.82843L24.2929 4L21.4645 1.17157C21.2692 0.976311 21.2692 0.659728 21.4645 0.464466C21.6597 0.269204 21.9763 0.269204 22.1716 0.464466L25.3536 3.64645ZM25 4.5H0V3.5H25V4.5Z" fill="black"/>
+                                            </svg>
                                             </a>
                                     <?php endif; ?>
                                 </div>
