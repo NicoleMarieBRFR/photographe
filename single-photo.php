@@ -76,44 +76,7 @@
                         <section id="related">
                             <h2 class="m-rp"> Vous aimerez aussi </h2>
                             <div class="related-post">
-                            <?php
-                                $category_slug = get_the_terms( get_the_ID(), 'categorie', false )[0]->slug; // Whatever the category ID is for your aerial category
-                                $loop = new WP_Query( array( 
-                                    'post_type' => 'photo',
-                                    'tax_query' => array(
-                                        array(
-                                            'taxonomy' => 'categorie', // Remplacez 'votre_taxonomie' par le nom de votre taxonomie personnalisée
-                                            'field' => 'slug', // Vous pouvez utiliser 'id', 'slug' ou 'name' pour le champ
-                                            'terms' => $category_slug, // Remplacez 'votre_terme' par le terme que vous souhaitez cibler
-                                        ),
-                                    ),
-                                    'posts_per_page' =>  2,
-                                    'orderby' => 'date', // Purely optional - just for some ordering
-                                    'order' => 'DESC' // Ditto
-                                ) );
-                                
-
-                                // The Loop.
-                                if ( $loop->have_posts() ) {
-                                    echo '<ul>';
-                                    while ( $loop->have_posts() ) {
-                                        $loop->the_post(); 
-                                        echo '<li>';
-                                        if (has_post_thumbnail()) {
-                                            // Affichez l'image en vedette
-                                            the_post_thumbnail(); // Vous pouvez remplacer 'thumbnail' par la taille d'image souhaitée
-                                        }
-                                        echo '<a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a>';
-                                        echo '</li>';
-                                    }
-                                    echo '</ul>';
-                                } else {
-                                    esc_html_e( 'Aucun article correspondant trouvé.' );
-                                }
-
-                                wp_reset_postdata();
-                                ?>
-
+                                <?php get_template_part('templates_part/photo_block'); ?>
                             </div>
                             <div class="related_button m-rp">
                                 <button class="button_style">Toute les photos</button>
