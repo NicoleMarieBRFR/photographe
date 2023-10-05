@@ -24,3 +24,21 @@ jQuery(document).ready(function(jQuery){
 	    }
     });
 });
+
+//menu hamburger
+let dropdown = document.querySelector('.menu'), //ul
+    buttonClick = document.querySelector('.check-button'), //button
+    hamburger = document.querySelector('.menu-icon');
+
+buttonClick.addEventListener('click', () => {
+    dropdown.classList.toggle('show-dropdown'); // add class
+    hamburger.classList.toggle('animate-button');
+
+	if (buttonClick.classList.contains('show-dropdown')) {
+        buttonClick.classList.remove('show-dropdown');
+        document.body.style.overflow = 'auto';
+    } else {
+        buttonClick.classList.add('show-dropdown');
+        document.body.style.overflow = 'hidden';
+    }
+})

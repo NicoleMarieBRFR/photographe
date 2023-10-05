@@ -1,18 +1,4 @@
 @charset "UTF-8";
-body {
-  font-family: "SpaceMono-Regular";
-}
-
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-/*Medias queries*/
-/*1200px*/
-/*992px*/
-/*768px*/
-/*576px*/
 /**
 1. Normalize
 2. Theme Specific CSS
@@ -361,7 +347,6 @@ template {
   display: none;
 }
 
-/* Variables de couleur */
 @font-face {
   font-family: "SpaceMono-Regular";
   src: url(../fonts/SpaceMono-Regular.ttf);
@@ -372,6 +357,26 @@ template {
 /*992px*/
 /*1200px*/
 /*1584px*/
+/*Medias queries*/
+/*1200px*/
+/*992px*/
+/*768px*/
+/*576px*/
+body {
+  overflow-x: none;
+  font-family: "SpaceMono-Regular";
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 600px;
+}
+@media only screen and (min-width: 62rem) {
+  .container {
+    max-width: 1440px;
+  }
+}
+
 /* Main Menu */
 .gp-main-menu {
   background: #fff;
@@ -392,7 +397,6 @@ template {
       -ms-flex-align: center;
           align-items: center;
   margin: auto;
-  max-width: 1440px;
   z-index: 1000;
 }
 .top-bar .main-menu {
@@ -408,25 +412,86 @@ template {
           align-items: center;
 }
 .top-bar .main-menu ul {
+  position: fixed;
+  width: 100%;
+  opacity: 0;
+  left: 0;
+  text-align: left;
+  -webkit-transition: all cubic-bezier(0.79, 0.14, 0.15, 0.86) 0.5s;
+  transition: all cubic-bezier(0.79, 0.14, 0.15, 0.86) 0.5s;
+  padding: 0;
   margin: 0;
-  padding-left: 0;
+  z-index: 1;
+  margin-top: 40px;
+  background-color: #E00000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: calc(-13% + 100dvh);
+  z-index: 101;
+}
+@media only screen and (min-width: 62rem) {
+  .top-bar .main-menu ul {
+    position: relative;
+    margin: 0;
+    padding-left: 0;
+    top: 0;
+    left: initial;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    opacity: 1;
+    background-color: transparent;
+    height: initial;
+  }
 }
 .top-bar .main-menu ul li {
-  display: inline-block;
-  line-height: 55px;
-  position: relative;
+  display: block;
+  margin: 15px 0;
+  line-height: 30px;
+  margin: 28px 0;
+}
+@media only screen and (min-width: 62rem) {
+  .top-bar .main-menu ul li {
+    display: inline-block;
+    line-height: 55px;
+    position: relative;
+    margin: 0;
+  }
 }
 .top-bar .main-menu ul li.current_page_item > a {
   font-weight: bold;
 }
 .top-bar .main-menu ul li a {
-  color: #000;
+  color: #fff;
+  font-size: 2.75rem;
   padding: 0 22px;
   text-decoration: none;
   display: block;
+  text-transform: uppercase;
+}
+@media only screen and (min-width: 62rem) {
+  .top-bar .main-menu ul li a {
+    color: #000;
+    font-size: 1rem;
+  }
 }
 .top-bar .main-menu ul li a:hover, .top-bar .main-menu ul li a:active {
-  color: red;
+  font-weight: bold;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -436,8 +501,16 @@ template {
 
 .menu-icon,
 .check-button {
-  cursor: pointer;
-  display: none;
+  display: block;
+  background: transparent;
+  border: none;
+}
+@media only screen and (min-width: 62rem) {
+  .menu-icon,
+  .check-button {
+    cursor: pointer;
+    display: none;
+  }
 }
 
 .menu-icon .bar1,
@@ -450,13 +523,35 @@ template {
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
+.menu-icon .check-button {
+  border: none;
+  background: transparent;
+  height: 55px;
+}
+
+@media only screen and (max-width: 62rem) {
+  .animate-button .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-4px, 4px);
+    transform: rotate(-45deg) translate(-4px, 4px);
+  }
+  .animate-button .bar2 {
+    opacity: 0;
+  }
+  .animate-button .bar3 {
+    -webkit-transform: rotate(45deg) translate(-7px, -7px);
+    transform: rotate(45deg) translate(-7px, -7px);
+  }
+}
+.show-dropdown {
+  opacity: 1 !important;
+}
 
 .custom-logo {
   letter-spacing: 6px;
   text-transform: uppercase;
 }
 .custom-logo a {
-  color: red;
+  color: #E00000;
   text-decoration: none;
   font-weight: 900;
 }
@@ -624,7 +719,8 @@ template {
   height: 100%;
 }
 .hero-items h1 {
-  margin: 0;
+  margin: 0 auto;
+  font-size: 8vw;
 }
 
 main {
@@ -635,34 +731,6 @@ main #content-hero {
   background-repeat: no-repeat;
   background-position: center;
   height: calc(100vh - 32px);
-}
-
-.site-footer {
-  border-top: 1px solid #000;
-}
-.site-footer .main-menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 40px;
-}
-.site-footer .main-menu ul li {
-  display: inline-block;
-  position: relative;
-}
-.site-footer .main-menu ul li a {
-  color: #000;
-  padding: 0 22px;
-  text-decoration: none;
-}
-.site-footer .main-menu ul li a:hover {
-  color: red;
 }
 
 .button_style {
@@ -898,4 +966,64 @@ main #content-hero {
     padding-left: 0;
     padding-right: 0;
   }
+}
+
+#menu-footer-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media only screen and (min-width: 62rem) {
+  #menu-footer-menu {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
+.site-footer {
+  border-top: 1px solid #000;
+}
+.site-footer .main-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 200px;
+}
+@media only screen and (min-width: 62rem) {
+  .site-footer .main-menu {
+    height: 40px;
+  }
+}
+.site-footer .main-menu ul li {
+  display: inline-block;
+  position: relative;
+  margin: 12px 0;
+}
+@media only screen and (min-width: 62rem) {
+  .site-footer .main-menu ul li {
+    margin: 0;
+  }
+}
+.site-footer .main-menu ul li a {
+  color: #000;
+  padding: 0 22px;
+  text-decoration: none;
+}
+.site-footer .main-menu ul li a:hover {
+  color: red;
 }

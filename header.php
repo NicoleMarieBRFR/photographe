@@ -1,6 +1,6 @@
 <header>
     <section class="gp-main-menu">
-        <div class="top-bar">
+        <div class="top-bar container">
             <div class="custom-logo">
                 <?php 
                     if( has_custom_logo() ){

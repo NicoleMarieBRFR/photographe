@@ -7,7 +7,8 @@
     align-items: center;
     height: 100%;
     h1 {
-        margin: 0;
+        margin: 0 auto;
+        font-size: 8vw;
     }
 }
 main {
@@ -19,31 +20,6 @@ main {
         height: calc(100vh - 32px);
     }
 }
-
-.site-footer {
-    border-top: 1px solid #000;
-    .main-menu {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 40px;
-        ul {
-            li {
-                display: inline-block;
-                position: relative;
-                a {
-                    color: #000;
-                    padding: 0 22px;
-                    text-decoration: none;
-                    &:hover {
-                        color: red;
-                    }
-                }
-            }
-        }
-    }
-}
-
 .button_style {
     width: 100%;
     padding: 16px;

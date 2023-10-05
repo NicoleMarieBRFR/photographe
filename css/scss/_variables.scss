@@ -1,7 +1,6 @@
-/* Variables de couleur */
-// $color-main: #E00000;
-// $color-white: #fff;
 $color-black: #000;
+$color-main: #E00000;
+$color-white: #fff;
 
 // Font face
 @font-face  {
@@ -15,3 +14,39 @@ $tablet-breakpoint				: 48rem; /*768px*/
 $computer-breakpoint			: 62rem; /*992px*/
 $large-monitor-breakpoint		: 75rem; /*1200px*/
 $widescreen-monitor-breakpoint	: 99rem; /*1584px*/
+
+/*Medias queries*/
+/*1200px*/
+@mixin bp-min-large {
+    @media only screen and (min-width: $large-monitor-breakpoint ) {
+        @content;
+    }
+}
+/*992px*/
+@mixin bp-max-computer {
+    @media only screen and (max-width: $computer-breakpoint) {
+        @content;
+    }
+}
+@mixin bp-min-computer {
+    @media only screen and (min-width: $computer-breakpoint) {
+        @content;
+    }
+}
+/*768px*/
+@mixin bp-max-tablet {
+    @media only screen and (max-width: $tablet-breakpoint) {
+        @content;
+    }
+}
+@mixin bp-min-tablet {
+    @media only screen and (min-width: $tablet-breakpoint) {
+        @content;
+    }
+}
+/*576px*/
+@mixin bp-min-mobile {
+    @media only screen and (min-width: $mobile-breakpoint ) {
+        @content;
+    }
+}

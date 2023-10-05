@@ -10,47 +10,89 @@
     justify-content: space-between;
     align-items: center;
     margin: auto;
-    max-width: 1440px;
     z-index: 1000;
     .main-menu {
       height: 80px;
       display: flex;
       justify-content: center;
       align-items: center;
-      ul {
-        margin: 0;
-        padding-left: 0;
-        li {
-          display: inline-block;
-          line-height: 55px;
-          position: relative;
-            &.current_page_item>a {
-                font-weight: bold;
+        ul {
+            position: fixed;
+            width: 100%;
+            opacity: 0;
+            left: 0;
+            text-align: left;
+            transition: all cubic-bezier(.79, .14, .15, .86) .5s;
+            padding: 0;
+            margin: 0;
+            z-index: 1;
+            margin-top: 40px;
+            background-color: $color-main;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: calc(-13% + 100dvh);
+            z-index: 101;
+            @include bp-min-computer {
+                position: relative;
+                margin: 0;
+                padding-left: 0;
+                top: 0;
+                left: initial;
+                flex-direction: row;
+                justify-content: flex-end;
+                opacity: 1;
+                background-color: transparent;
+                height: initial;
             }
-            a {
-            color: $color-black;
-            // color: #000;
-            padding: 0 22px;
-            text-decoration: none;
-            display: block;
-                &:hover,
-                &:active {
-                // color: $color-main;
-                color: red;
-                transition: .5s all;
+            li {
+                display: block;
+                margin: 15px 0;
+                line-height: 30px;
+                margin: 28px 0;
+                @include bp-min-computer {
+                    display: inline-block;
+                    line-height: 55px;
+                    position: relative;
+                    margin: 0;
                 }
-                &:focus+ul {
-                  display: block;
+                &.current_page_item>a {
+                    font-weight: bold;
+                }
+                a {
+                color: $color-white;
+                font-size: 2.75rem;
+                padding: 0 22px;
+                text-decoration: none;
+                display: block;
+                text-transform: uppercase;
+                    @include bp-min-computer{
+                        color: $color-black;
+                        font-size: 1rem;
+                    }
+                    &:hover,
+                    &:active {
+                    font-weight: bold;
+                    transition: .5s all;
+                    }
+                    &:focus+ul {
+                    display: block;
+                    }
                 }
             }
         }
-      }
     }
 }  
 .menu-icon,
 .check-button {
-    cursor: pointer;
-    display: none;
+    display: block;
+    background: transparent;
+    border: none;
+    @include bp-min-computer {
+        cursor: pointer;
+        display: none;
+    }
 }
   
 .menu-icon {
@@ -62,15 +104,40 @@
         background-color: #333;
         margin: 5px 0;
         transition: 0.4s;
+    }
+    .check-button {
+        border: none;
+        background: transparent;
+        height: 55px;
     }     
 }
+@include bp-max-computer {
+    .animate-button {
+        .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-4px, 4px);
+        transform: rotate(-45deg) translate(-4px, 4px);
+        }
+        .bar2 {
+            opacity: 0;
+        }
+        .bar3 {
+            -webkit-transform: rotate(45deg) translate(-7px, -7px);
+            transform: rotate(45deg) translate(-7px, -7px);
+        }
+    }
+}
+
+.show-dropdown {
+    opacity: 1!important;
+  }
+
 
 // without logo
 .custom-logo {
     letter-spacing: 6px;
     text-transform: uppercase;
     a {
-        color: red;
+        color: $color-main;
         text-decoration: none;
         font-weight: 900;
     }
