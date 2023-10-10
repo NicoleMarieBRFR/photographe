@@ -47,27 +47,6 @@ function  photographe_customizer( $wp_customize ) {
         ) 
     );
 
-// home img
-
-    $wp_customize->add_setting(
-        'set_hero_background',
-        array(
-            'type' => 'theme_mod',
-            'sanitize_callback' => 'absint'
-        )
-    );
-
-    $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
-        'set_hero_background',
-            array(
-                'label' => 'Home Image',
-                'section'   => 'sec_hero',
-                'mime_type' => 'image'
-            )
-        )
-    );
-
-
 }
 
 add_action( 'customize_register', 'photographe_customizer' );
