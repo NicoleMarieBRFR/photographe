@@ -32,7 +32,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            height: calc(-13% + 100dvh);
+            height: calc(-12% + 100dvh);
             z-index: 101;
             @include bp-min-computer {
                 position: relative;

@@ -45,3 +45,11 @@ function prefix_add_menu_item ( $items, $args ) {
               
               return $items;
 }
+
+// para mudar a quantidade de posts per page da pagina home
+function custom_posts_per_page($query) {
+    if (is_page('home')) { // Substitua 'sua-pagina' pelo slug ou ID da página desejada
+        $query->set('posts_per_page', 8); // Altere o número aqui
+    }
+}
+add_action('pre_get_posts', 'custom_posts_per_page');

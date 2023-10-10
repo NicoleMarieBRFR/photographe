@@ -437,7 +437,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: calc(-13% + 100dvh);
+  height: calc(-12% + 100dvh);
   z-index: 101;
 }
 @media only screen and (min-width: 62rem) {

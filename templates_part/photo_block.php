@@ -1,4 +1,5 @@
-<?php
+<?php       
+
     $category_slug = get_the_terms( get_the_ID(), 'categorie', false )[0]->slug;
     $loop = new WP_Query( array( 
         'post_type' => 'photo',
@@ -12,7 +13,8 @@
         'posts_per_page' =>  2,
         'orderby' => 'date', // Purely optional - just for some ordering
         'order' => 'DESC' // Ditto
-    ) );                                
+    ) );   
+    set_query_var( 'loop', $loop );
 
     // The Loop.
     if ( $loop->have_posts() ) {
@@ -32,5 +34,5 @@
         esc_html_e( 'Aucun article correspondant trouvé.' );
     }
 
-    wp_reset_postdata();
+    // wp_reset_postdata();
 ?>
