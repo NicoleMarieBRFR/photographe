@@ -54,53 +54,20 @@
             </main>
         </div>
         
-        <div class="teste">
-            <?php
-            // Récupérez une photo aléatoire du catalogue
-            query_posts(
-                array(
-                    'post_type' => 'photo', // Assurez-vous que 'photo' correspond à votre type de contenu personnalisé
-                    'showposts' => 1,
-                    'orderby' => 'rand',
-                )
-            );
-
-            // Vérifiez s'il y a des articles
-            if (have_posts()) :
-                while (have_posts()) : the_post();
-                    // Récupérez l'URL de l'image depuis le champ personnalisé (remplacez 'image_url' par le nom correct de votre champ d'image)
-                    $image_url = get_post_meta(get_the_ID(), 'image_url', true);
-
-                    // Affichez votre héros avec l'image aléatoire en arrière-plan
-                    ?>
-                    <div class="hero" style="background-image: url('<?php echo esc_url(get_post_meta(get_the_ID(), 'image_url', true)); ?>');">
-                        <!-- Le contenu de votre héros -->
-                    </div>
-                    <?php
-                endwhile;
-            else :
-                // Aucun article correspondant trouvé
-                echo esc_html_e('Aucune photo trouvée.');
-            endif;
-
-            // Réinitialisez la requête
-            wp_reset_query();
-            ?>
-        </div>
-        
     </div>
 
     <div id="content" class="site-content">
         <div id="primary" class="content-area">
-            <main id="main" class="site-main">
-                <section id="all-photos">
+            <section id="all-photos">
+                <div class="container">
                     <div class="photos-home">
+                        <?php get_template_part('templates_part/photo_block'); ?>
                     </div>
                     <div class="related_button m-rp">
-                        <button class="button_style">Charger plus</button>
-                    </div>                         
-                </section>
-            </main>
+                        <button class="button_style" data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>">Charger plus</button>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 

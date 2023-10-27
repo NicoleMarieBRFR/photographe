@@ -4,13 +4,13 @@
     box-shadow: rgb(0 0 0 / 9%) 1px 10px 10px 1px;
     position: fixed;
     width: 100%; 
+    z-index: 1001;
 }
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: auto;
-    z-index: 1000;
     .main-menu {
       height: 80px;
       display: flex;
