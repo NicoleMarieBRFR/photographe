@@ -1,4 +1,76 @@
 #all-photos {
+    .filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 80px 0 40px 0;
+        .filters-left {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            .item {
+                    width: 100%;
+                    max-width: 260px;
+                    position: relative;
+                    display: inline-block;
+                    box-sizing: border-box;
+                &::after, &::before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    border-top: 2px solid #000;
+                    width: 10px;
+                }
+                &::before{
+                    right: 26px;
+                    -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                }                    
+                &::after{
+                right: 20px;
+                -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+                }
+                &:active, &:focus-within {
+                    &::before{
+                        right: 26px;
+                        -webkit-transform: rotate(45deg);
+                        transform: rotate(45deg);
+                        -webkit-transform: rotate(-45deg);
+                    transform: rotate(-45deg);
+                    }                    
+                    &::after{
+                    right: 20px;
+                    -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                    }
+                }
+            }
+            select {
+                width: 100%;
+                max-width: 260px;
+                -webkit-appearance: none;    
+                -moz-appearance: none;
+                option:checked, option:hover {
+                    color: #fff;
+                    background-color: #E00000;
+                }
+                @include bp-min-computer {
+                    margin-right: 36px;
+                }
+            }
+        }
+        .filters-left,
+        .filters-right {
+            select {
+                padding: 12px;
+                border-radius: 8px;
+                border: 1.3px solid #B8BBC2;
+                font-family: 'Poppins-Regular';
+                text-transform: uppercase;
+            }
+        }
+    }
     .photos-home {
         margin: 0 29px;
         @include bp-min-computer {

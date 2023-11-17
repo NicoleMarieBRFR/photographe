@@ -55,37 +55,101 @@ function custom_posts_per_page($query) {
 add_action('pre_get_posts', 'custom_posts_per_page');
 
 //ajax
-add_action( 'wp_ajax_capitaine_load_comments', 'capitaine_load_comments' );
-add_action( 'wp_ajax_nopriv_capitaine_load_comments', 'capitaine_load_comments' );
+add_action( 'wp_ajax_button_load', 'button_load' );
+add_action( 'wp_ajax_nopriv_button_load', 'button_load' );
+add_action('wp_ajax_filters', 'filters');
+add_action('wp_ajax_nopriv_filters', 'filters');
 
-function capitaine_load_comments() {
+function button_load() {
 
 
   	// Récupération des données du formulaire
-  	$page = intval( $_POST['postid'] );
+  	$page = intval( $_POST['paged'] );
+    $category = intval( $_POST['categories']);
+      
+    $offset = 8 * $page;
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' =>  8,
+        'orderby' => 'date', // Purely optional - just for some ordering
+        'order' => 'DESC', // Ditto
+        'offset' => $offset
+    );
+        
+    // filters
+    // Adiciona o filtro de categoria se uma categoria for fornecida
+    if (!empty($category)) {
+        $args['categorie'] = $category;
+    }
     
-	// Vérifier que l'article est publié, et public
-	if( get_post_status( $page ) !== 'publish' ) {
-    	wp_send_json_error( "Vous n'avez pas accès aux commentaires de cet article.", 403 );
-	}
+    $my_query = new WP_Query( $args );
 
-  	// Utilisez sanitize_text_field() pour les chaines de caractères.
-  	// exemple : 
-    $name = sanitize_text_field( $_POST['name'] );
+    $html = "";
 
-  	// Requête des commentaires
-  	$comments = get_comments([
-    	'page' => $page,
-    	'status' => 'approve'
-  	]);
-
-  	// Préparer le HTML des commentaires
-  	$html = wp_list_comments([
-    	'per_page' => 8,
-    	'avatar_size' => 76,
-    	'echo' => false,
-  	], $comments );
+    if ( $my_query->have_posts() ) {
+        while ( $my_query->have_posts() ) {
+            $my_query->the_post(); 
+            $html .= '<li>';
+            if (has_post_thumbnail()) {
+                // Affichez l'image en vedette
+                $thumbnail = get_the_post_thumbnail();
+                $html .= '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
+            }
+            $html .= '</li>';
+            // $html .= get_template_part('templates_part/photo-blockfinal');
+        }
+    } else {
+        wp_send_json_error( '' );
+    }
+    // 4. On réinitialise à la requête principale (important)
+    wp_reset_postdata();
 
   	// Envoyer les données au navigateur
 	wp_send_json_success( $html );
+}
+
+function filters() {
+    
+  	// Récupération des données du formulaire
+  	$page = intval( $_POST['paged'] );
+      // filters
+      // Adiciona o filtro de categoria se uma categoria for fornecida
+      if (!empty($category)) {
+          $args['categorie'] = $category;
+      }
+  
+      $offset = 8 * $page;
+      $args = array(
+      'post_type' => 'photo',
+      'posts_per_page' =>  8,
+      'orderby' => 'date', // Purely optional - just for some ordering
+      'order' => 'DESC', // Ditto
+      'offset' => $offset
+      );
+  
+  
+      $my_query = new WP_Query( $args );
+  
+      $html = "";
+  
+      if ( $my_query->have_posts() ) {
+          while ( $my_query->have_posts() ) {
+              $my_query->the_post(); 
+              $html .= '<li>';
+              if (has_post_thumbnail()) {
+                  // Affichez l'image en vedette
+                  $thumbnail = get_the_post_thumbnail();
+                  $html .= '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
+              }
+              $html .= '</li>';
+              // $html .= get_template_part('templates_part/photo-blockfinal');
+          }
+      } else {
+          wp_send_json_error( '' );
+      }
+      // 4. On réinitialise à la requête principale (important)
+      wp_reset_postdata();
+  
+        // Envoyer les données au navigateur
+      wp_send_json_success( $html );
 }

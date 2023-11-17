@@ -63,6 +63,7 @@
                     echo '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
                 }
                 echo '</li>';
+                // echo get_template_part('templates_part/photo-blockfinal');
             }
             echo '</ul>';
         } else {

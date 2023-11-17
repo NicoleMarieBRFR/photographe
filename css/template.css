@@ -351,6 +351,10 @@ template {
   font-family: "SpaceMono-Regular";
   src: url(../fonts/SpaceMono-Regular.ttf);
 }
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url(../fonts/Poppins-Regular.ttf);
+}
 /* Grille sémantic ui */
 /*576px*/
 /*768px*/
@@ -1028,6 +1032,87 @@ main #content-hero {
   color: red;
 }
 
+#all-photos .filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 80px 0 40px 0;
+}
+#all-photos .filters .filters-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+#all-photos .filters .filters-left .item {
+  width: 100%;
+  max-width: 260px;
+  position: relative;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#all-photos .filters .filters-left .item::after, #all-photos .filters .filters-left .item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  border-top: 2px solid #000;
+  width: 10px;
+}
+#all-photos .filters .filters-left .item::before {
+  right: 26px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+#all-photos .filters .filters-left .item::after {
+  right: 20px;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+#all-photos .filters .filters-left .item:active::before, #all-photos .filters .filters-left .item:focus-within::before {
+  right: 26px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+#all-photos .filters .filters-left .item:active::after, #all-photos .filters .filters-left .item:focus-within::after {
+  right: 20px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+#all-photos .filters .filters-left select {
+  width: 100%;
+  max-width: 260px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+#all-photos .filters .filters-left select option:checked, #all-photos .filters .filters-left select option:hover {
+  color: #fff;
+  background-color: #E00000;
+}
+@media only screen and (min-width: 62rem) {
+  #all-photos .filters .filters-left select {
+    margin-right: 36px;
+  }
+}
+#all-photos .filters .filters-left select,
+#all-photos .filters .filters-right select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.3px solid #B8BBC2;
+  font-family: "Poppins-Regular";
+  text-transform: uppercase;
+}
 #all-photos .photos-home {
   margin: 0 29px;
 }

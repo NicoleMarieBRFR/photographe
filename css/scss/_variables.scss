@@ -7,6 +7,10 @@ $color-white: #fff;
     font-family: 'SpaceMono-Regular';
     src: url(../fonts/SpaceMono-Regular.ttf);
 }
+@font-face  {
+    font-family: 'Poppins-Regular';
+    src: url(../fonts/Poppins-Regular.ttf);
+}
 
 /* Grille sémantic ui */
 $mobile-breakpoint				: 36rem; /*576px*/

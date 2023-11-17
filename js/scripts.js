@@ -64,20 +64,21 @@ document.addEventListener("DOMContentLoaded", function() {
 // voir plus page d'accueil
 (function ($) {
     $(document).ready(function () {
-
+        let currentPage = 1;
         // Chargment des commentaires en Ajax
         $('.button_style').click(function (e) {
-
             // Empêcher l'envoi classique du formulaire
             e.preventDefault();
 
             // L'URL qui réceptionne les requêtes Ajax dans l'attribut "action" de <form>
             const ajaxurl = $(this).data('ajaxurl');
-			
+            
             // Les données de notre formulaire
 			// ⚠️ Ne changez pas le nom "action" !
-            var buttonVoirPlus = {
-                
+            var data = {
+                action: 'button_load',
+                paged: currentPage,
+                //category: valeur de select changé
             }
 
             // Pour vérifier qu'on a bien récupéré les données
@@ -87,27 +88,76 @@ document.addEventListener("DOMContentLoaded", function() {
             // Requête Ajax en JS natif via Fetch
             fetch(ajaxurl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Cache-Control': 'no-cache',
-                },
+                dataType: 'html',
                 body: new URLSearchParams(data),
+
             })
             .then(response => response.json())
             .then(body => {
-                console.log(body);
-
+                console.log(body.data);
+                $(".photos-home ul").append(body.data);
                 // En cas d'erreur
                 if (!body.success) {
-                    alert(response.data);
+                    $(this).hide();
                     return;
                 }
-
+                currentPage++;
                 // Et en cas de réussite
-                $(this).hide(); // Cacher le formulaire
-                $('.comments').html(body.data); // Et afficher le HTML
+                //$(this).hide(); // Cacher le formulaire
+                // $('').html(body.data); // Et afficher le HTML
             });
         });
         
+    });
+})(jQuery);
+
+// EU DEVO MISTURAR OS DOIS CODIGOS PARA QUE QUANDO EU CLICAR NO BOTAO CARREAGR MAIS, NAO TENHA MAIS ELEMENTOS MISTURAR E SIM SOMENTE DO FILTRO
+
+//AJAX FILTERS
+(function ($) {
+    $(document).ready(function () {
+        let currentPage = 1;
+        
+        // Carregar comentários usando Ajax
+        $('#cat, #format').on('change', function(e) {
+            e.preventDefault();
+
+            const ajaxurl = $(this).data('ajaxurl');
+
+            var categorie = $('#cat').val();
+            var format = $('#format').val();
+
+            // Adicione os parâmetros de filtro que deseja enviar
+            var data = {
+                action: 'filters',
+                paged: currentPage,
+                categorie: categorie,
+                format: format
+            }
+
+            console.log(ajaxurl);
+            console.log(data);
+
+            // Requête Ajax usando jQuery
+            $.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response.data);
+                    $(".photos-home ul").append(response.data);
+
+                    if (!response.success) {
+                        $(this).hide();
+                        return;
+                    }
+                    currentPage++;
+                },
+                error: function () {
+                    // Tratar erros, se necessário
+                }
+            });
+        });
     });
 })(jQuery);

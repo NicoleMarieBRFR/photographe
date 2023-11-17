@@ -60,11 +60,61 @@
         <div id="primary" class="content-area">
             <section id="all-photos">
                 <div class="container">
+                    <div class="filters">
+
+                        <div class="filters-left">
+                            <div class="item">
+                                <select name="event-dropdown" id="cat"  data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>"> 
+                                    <option value=""><?php echo esc_attr_e( 'Catégories', 'textdomain' ); ?></option> 
+                                    <?php 
+                                        $categories = get_categories( array(
+                                            'taxonomy' => 'categorie',
+                                            'orderby' => 'name',
+                                            'order'   => 'ASC'
+                                            ) );
+            
+                                    foreach ( $categories as $category ) {
+                                        printf( '<option value="%1$s">%2$s</option>',
+                                            esc_attr( $category->term_id ),
+                                            esc_html( $category->name )
+                                        );
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+    
+                            <div class="item">
+                                <select name="event-dropdown" id="format" data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>"> 
+                                    <option value=""><?php echo esc_attr_e( 'Format', 'textdomain' ); ?></option> 
+                                    <?php 
+                                        $categories = get_categories( array(
+                                            'taxonomy' => 'format',
+                                            'orderby' => 'name',
+                                            'order'   => 'ASC'
+                                            ) );
+            
+                                    foreach ( $categories as $category ) {
+                                        printf( '<option value="%1$s">%2$s</option>',
+                                            esc_attr( $category->term_id ),
+                                            esc_html( $category->name )
+                                        );
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="filters-right">
+    
+                        </div>
+    
+                    </div>
+                    
                     <div class="photos-home">
                         <?php get_template_part('templates_part/photo_block'); ?>
                     </div>
                     <div class="related_button m-rp">
-                        <button class="button_style" data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>">Charger plus</button>
+                        <button class="button_style" data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>" >Charger plus</button>
                     </div>
                 </div>
             </section>
