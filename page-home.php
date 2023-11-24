@@ -64,7 +64,7 @@
 
                         <div class="filters-left">
                             <div class="item">
-                                <select name="event-dropdown" id="cat"  data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>"> 
+                                <select name="event-dropdown" id="cat"  data-ajaxurl="<?php echo esc_url(admin_url('admin-ajax.php')); ?>"> 
                                     <option value=""><?php echo esc_attr_e( 'Catégories', 'textdomain' ); ?></option> 
                                     <?php 
                                         $categories = get_categories( array(
@@ -84,7 +84,7 @@
                             </div>
     
                             <div class="item">
-                                <select name="event-dropdown" id="format" data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>"> 
+                                <select name="event-dropdown" id="format" data-ajaxurl="<?php echo esc_url(admin_url('admin-ajax.php')); ?>"> 
                                     <option value=""><?php echo esc_attr_e( 'Format', 'textdomain' ); ?></option> 
                                     <?php 
                                         $categories = get_categories( array(

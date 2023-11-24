@@ -55,13 +55,12 @@ function custom_posts_per_page($query) {
 add_action('pre_get_posts', 'custom_posts_per_page');
 
 //ajax
-add_action( 'wp_ajax_button_load', 'button_load' );
-add_action( 'wp_ajax_nopriv_button_load', 'button_load' );
-add_action('wp_ajax_filters', 'filters');
-add_action('wp_ajax_nopriv_filters', 'filters');
+add_action( 'wp_ajax_ajaxGallery', 'ajaxGallery' );
+add_action( 'wp_ajax_nopriv_ajaxGallery', 'ajaxGallery' );
+// add_action('wp_ajax_filters', 'filters');
+// add_action('wp_ajax_nopriv_filters', 'filters');
 
-function button_load() {
-
+function ajaxGallery() {
 
   	// Récupération des données du formulaire
   	$page = intval( $_POST['paged'] );
@@ -76,10 +75,22 @@ function button_load() {
         'offset' => $offset
     );
         
-    // filters
     // Adiciona o filtro de categoria se uma categoria for fornecida
-    if (!empty($category)) {
-        $args['categorie'] = $category;
+    if ( ! empty( $category ) ) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie',
+            'field'    => 'id',
+            'terms'    => $category,
+        );
+    }
+
+    // Adiciona o filtro de formato se um formato for fornecido
+    if ( ! empty( $format ) ) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field'    => 'id',
+            'terms'    => $format,
+        );
     }
     
     $my_query = new WP_Query( $args );
@@ -108,48 +119,49 @@ function button_load() {
 	wp_send_json_success( $html );
 }
 
-function filters() {
+// function filters() {
     
-  	// Récupération des données du formulaire
-  	$page = intval( $_POST['paged'] );
-      // filters
-      // Adiciona o filtro de categoria se uma categoria for fornecida
-      if (!empty($category)) {
-          $args['categorie'] = $category;
-      }
+//   	// Récupération des données du formulaire
+//   	$page = intval( $_POST['paged'] );
+//     $category = intval( $_POST['categories']);
+//       // filters
+//       // Adiciona o filtro de categoria se uma categoria for fornecida
+      
+//       $offset = 8 * $page;
+//       $args = array(
+//           'post_type' => 'photo',
+//           'posts_per_page' =>  8,
+//           'orderby' => 'date', // Purely optional - just for some ordering
+//           'order' => 'DESC', // Ditto
+//           'offset' => $offset
+//         );
+        
+//         if (!empty($category)) {
+//             $args['categorie'] = $category;
+//         }
   
-      $offset = 8 * $page;
-      $args = array(
-      'post_type' => 'photo',
-      'posts_per_page' =>  8,
-      'orderby' => 'date', // Purely optional - just for some ordering
-      'order' => 'DESC', // Ditto
-      'offset' => $offset
-      );
+//       $my_query = new WP_Query( $args );
   
+//       $html = "";
   
-      $my_query = new WP_Query( $args );
+//       if ( $my_query->have_posts() ) {
+//           while ( $my_query->have_posts() ) {
+//               $my_query->the_post(); 
+//               $html .= '<li>';
+//               if (has_post_thumbnail()) {
+//                   // Affichez l'image en vedette
+//                   $thumbnail = get_the_post_thumbnail();
+//                   $html .= '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
+//               }
+//               $html .= '</li>';
+//               // $html .= get_template_part('templates_part/photo-blockfinal');
+//           }
+//       } else {
+//           wp_send_json_error( '' );
+//       }
+//       // 4. On réinitialise à la requête principale (important)
+//       wp_reset_postdata();
   
-      $html = "";
-  
-      if ( $my_query->have_posts() ) {
-          while ( $my_query->have_posts() ) {
-              $my_query->the_post(); 
-              $html .= '<li>';
-              if (has_post_thumbnail()) {
-                  // Affichez l'image en vedette
-                  $thumbnail = get_the_post_thumbnail();
-                  $html .= '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
-              }
-              $html .= '</li>';
-              // $html .= get_template_part('templates_part/photo-blockfinal');
-          }
-      } else {
-          wp_send_json_error( '' );
-      }
-      // 4. On réinitialise à la requête principale (important)
-      wp_reset_postdata();
-  
-        // Envoyer les données au navigateur
-      wp_send_json_success( $html );
-}
+//         // Envoyer les données au navigateur
+//       wp_send_json_success( $html );
+// }

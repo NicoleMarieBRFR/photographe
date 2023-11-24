@@ -1,0 +1,41 @@
+.photos-home {
+    li {
+        position: relative;
+        .lightbox {
+            background-color: rgba(0,0,0,0.5);
+            position: absolute;
+            color: #fff;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            .group {
+                display: flex;
+                justify-content: space-between;
+                height: 100%;
+                align-items: end;
+                padding: 0 10px;
+            }
+            .eyes {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                top: 50%;
+                height: 5px;
+                img {
+                    width: 100%;
+                    display: block;
+                    max-width: 46px;
+                    max-height: 31px;
+                }
+            }
+        }
+        &:hover .lightbox{
+            transition: 0.5s;
+            opacity: 1;
+        }
+    }
+}
