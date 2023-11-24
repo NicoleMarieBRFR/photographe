@@ -57,8 +57,6 @@ add_action('pre_get_posts', 'custom_posts_per_page');
 //ajax
 add_action( 'wp_ajax_ajaxGallery', 'ajaxGallery' );
 add_action( 'wp_ajax_nopriv_ajaxGallery', 'ajaxGallery' );
-// add_action('wp_ajax_filters', 'filters');
-// add_action('wp_ajax_nopriv_filters', 'filters');
 
 function ajaxGallery() {
 
@@ -106,8 +104,13 @@ function ajaxGallery() {
                 $thumbnail = get_the_post_thumbnail();
                 $html .= '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
             }
+            //para poder adicionar o template do lightbox
+            ob_start();
+            get_template_part('templates_part/lightbox');
+            $lightbox_content = ob_get_clean();
+            $html .= $lightbox_content;
+
             $html .= '</li>';
-            // $html .= get_template_part('templates_part/photo-blockfinal');
         }
     } else {
         wp_send_json_error( '' );
@@ -118,50 +121,3 @@ function ajaxGallery() {
   	// Envoyer les données au navigateur
 	wp_send_json_success( $html );
 }
-
-// function filters() {
-    
-//   	// Récupération des données du formulaire
-//   	$page = intval( $_POST['paged'] );
-//     $category = intval( $_POST['categories']);
-//       // filters
-//       // Adiciona o filtro de categoria se uma categoria for fornecida
-      
-//       $offset = 8 * $page;
-//       $args = array(
-//           'post_type' => 'photo',
-//           'posts_per_page' =>  8,
-//           'orderby' => 'date', // Purely optional - just for some ordering
-//           'order' => 'DESC', // Ditto
-//           'offset' => $offset
-//         );
-        
-//         if (!empty($category)) {
-//             $args['categorie'] = $category;
-//         }
-  
-//       $my_query = new WP_Query( $args );
-  
-//       $html = "";
-  
-//       if ( $my_query->have_posts() ) {
-//           while ( $my_query->have_posts() ) {
-//               $my_query->the_post(); 
-//               $html .= '<li>';
-//               if (has_post_thumbnail()) {
-//                   // Affichez l'image en vedette
-//                   $thumbnail = get_the_post_thumbnail();
-//                   $html .= '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
-//               }
-//               $html .= '</li>';
-//               // $html .= get_template_part('templates_part/photo-blockfinal');
-//           }
-//       } else {
-//           wp_send_json_error( '' );
-//       }
-//       // 4. On réinitialise à la requête principale (important)
-//       wp_reset_postdata();
-  
-//         // Envoyer les données au navigateur
-//       wp_send_json_success( $html );
-// }
