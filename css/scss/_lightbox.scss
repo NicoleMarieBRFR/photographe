@@ -1,7 +1,7 @@
-.photos-home {
+.photos-home, .related-post {
     li {
         position: relative;
-        .lightbox {
+        .hover_img {
             background-color: rgba(0,0,0,0.5);
             position: absolute;
             color: #fff;
@@ -24,7 +24,7 @@
                 justify-content: center;
                 width: 100%;
                 top: 50%;
-                height: 5px;
+                height: 50%;
                 img {
                     width: 100%;
                     display: block;
@@ -32,10 +32,82 @@
                     max-height: 31px;
                 }
             }
+            .img_fullscreen {
+                button {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    border: none;
+                    background: transparent;
+                    cursor: pointer;                
+                }
+            }
         }
-        &:hover .lightbox{
+        &:hover .hover_img{
             transition: 0.5s;
             opacity: 1;
         }
+    }
+}
+.related-post {
+    li {
+        .hover_img {
+            .eyes {
+                height: 5px;
+            }
+        }
+    }
+}
+// lightbox
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 2000;
+    article {
+        height: 100%;
+        .lightbox_container {
+            height: 100%;
+            max-width: 564px;
+            margin: 0 auto;
+            .group {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                color: #fff;
+                align-items: end;
+                height: 85%;
+            }
+        }
+    }
+    .lightbox_next, .lightbox_prev, .lightbox_close {
+        border: none;
+        background-color: transparent;
+        position: fixed;
+        opacity: .5;
+        cursor: pointer;
+    }
+    .lightbox_next, .lightbox_prev {
+        top: 50%;
+        z-index: 2001;
+        &:hover, &:focus {
+            opacity: 1;
+        }
+    }
+    .lightbox_close {
+        top: 10px;
+        right: 10px;
+        z-index: 2002;
+    }
+    .lightbox_next {
+        right: 10px;
+    }
+    .lightbox_prev {
+        top: 50%;
+        left: 10px;
     }
 }

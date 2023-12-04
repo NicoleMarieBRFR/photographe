@@ -66,12 +66,13 @@ document.addEventListener("DOMContentLoaded", function() {
     $(document).ready(function () {
         let currentPage = 1; // Inicie em 0 para a primeira carga
 
-        function loadContent(action, paged, categorie, format, ajaxurl) {
+        function loadContent(action, paged, categorie, format, triDate, ajaxurl) {
             var data = {
                 action: action,
                 paged: paged,
                 categorie: categorie,
-                format: format
+                format: format,
+                triDate: triDate
             }
 
             console.log(ajaxurl);
@@ -102,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Carregar via filtros
-        $('#cat, #format').on('change', function (e) {
+        $('#cat, #format, #triDate').on('change', function (e) {
             e.preventDefault();
             currentPage = 0; // Reinicia a contagem de páginas ao alterar os filtros
             const filterVide = document.querySelector(".photos-home ul");
@@ -111,9 +112,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             var categorie = $('#cat').val();
             var format = $('#format').val();
+            var triDate = $('#triDate').val();
             var ajaxurl = $(this).data('ajaxurl');
 
-            loadContent('ajaxGallery', currentPage, categorie, format, ajaxurl);
+            loadContent('ajaxGallery', currentPage, categorie, format, triDate, ajaxurl);
         });
 
         // Chargement des commentaires en Ajax
@@ -124,8 +126,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const ajaxurl = $(this).data('ajaxurl');
             var categorie = $('#cat').val();
             var format = $('#format').val();
+            var triDate = $('#triDate').val();
             
-            loadContent('ajaxGallery', currentPage, categorie, format, ajaxurl);
+            loadContent('ajaxGallery', currentPage, categorie, format, triDate, ajaxurl);
 
             //mudar somente para um nome depois de terminar a funçao
         });

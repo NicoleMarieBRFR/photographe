@@ -105,7 +105,13 @@
                         </div>
                         
                         <div class="filters-right">
-    
+                            <div class="item">
+                                <select name="" id="triDate" data-ajaxurl="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" a>
+                                    <option value="">Trier par</option>
+                                    <option value="DESC">Des plus ancienne aux plus récentes</option>
+                                    <option value="ASC">Des plus récentes aux plus anciennes</option>
+                                </select>
+                            </div>
                         </div>
     
                     </div>

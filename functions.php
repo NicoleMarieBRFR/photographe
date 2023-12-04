@@ -62,14 +62,20 @@ function ajaxGallery() {
 
   	// Récupération des données du formulaire
   	$page = intval( $_POST['paged'] );
-    $category = intval( $_POST['categories']);
-      
+    $category = intval( $_POST['categorie']);
+    $format = intval( $_POST['format']);
+    $triDate = isset( $_POST['triDate']) ? sanitize_text_field( $_POST['triDate'] ) : ''; // Certifique-se de que triDate está definido e é uma string;
+
+    if ( empty( $triDate ) ) {
+        $triDate = 'DESC';
+    }  
+
     $offset = 8 * $page;
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' =>  8,
         'orderby' => 'date', // Purely optional - just for some ordering
-        'order' => 'DESC', // Ditto
+        'order' => $triDate, // Ditto
         'offset' => $offset
     );
         
