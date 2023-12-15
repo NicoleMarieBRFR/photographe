@@ -3,7 +3,8 @@
     background: #fff;
     box-shadow: rgb(0 0 0 / 9%) 1px 10px 10px 1px;
     position: fixed;
-    width: 100%; 
+    width: 100%;
+    top: 0;
     z-index: 1001;
 }
 .top-bar {
@@ -19,10 +20,9 @@
         ul {
             position: fixed;
             width: 100%;
-            opacity: 0;
             left: 0;
             text-align: left;
-            transition: all cubic-bezier(.79, .14, .15, .86) .5s;
+            transition: all 0.5s ease-out;
             padding: 0;
             margin: 0;
             z-index: 1;
@@ -33,7 +33,7 @@
             justify-content: center;
             flex-direction: column;
             height: calc(-12% + 100dvh);
-            z-index: 101;
+            display: none;
             @include bp-min-computer {
                 position: relative;
                 margin: 0;
@@ -128,7 +128,7 @@
 }
 
 .show-dropdown {
-    opacity: 1!important;
+    display: flex!important;
   }
 
 
@@ -161,13 +161,14 @@
         opacity: 1;
         visibility: visible;
         transition: opacity 0.3s 0s, visibility 0s 0s;
+        z-index: 1001;
     }
 }
 .cd-popup-container {
     position: relative;
     border: 5px solid #000;
     width: 90%;
-    top: 10%;
+    top: 7%;
     max-width: 597px;
     margin: auto;
     background: #FFF;

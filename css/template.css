@@ -363,7 +363,7 @@ template {
 /*768px*/
 /*576px*/
 body {
-  overflow-x: none;
+  overflow-x: hidden;
   font-family: "SpaceMono-Regular";
 }
 
@@ -383,6 +383,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.09) 1px 10px 10px 1px;
   position: fixed;
   width: 100%;
+  top: 0;
   z-index: 1001;
 }
 
@@ -401,10 +402,9 @@ body {
 .top-bar .main-menu ul {
   position: fixed;
   width: 100%;
-  opacity: 0;
   left: 0;
   text-align: left;
-  transition: all cubic-bezier(0.79, 0.14, 0.15, 0.86) 0.5s;
+  transition: all 0.5s ease-out;
   padding: 0;
   margin: 0;
   z-index: 1;
@@ -415,7 +415,7 @@ body {
   justify-content: center;
   flex-direction: column;
   height: calc(-12% + 100dvh);
-  z-index: 101;
+  display: none;
 }
 @media only screen and (min-width: 62rem) {
   .top-bar .main-menu ul {
@@ -513,7 +513,7 @@ body {
   }
 }
 .show-dropdown {
-  opacity: 1 !important;
+  display: flex !important;
 }
 
 .custom-logo {
@@ -545,13 +545,14 @@ body {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s 0s, visibility 0s 0s;
+  z-index: 1001;
 }
 
 .cd-popup-container {
   position: relative;
   border: 5px solid #000;
   width: 90%;
-  top: 10%;
+  top: 7%;
   max-width: 597px;
   margin: auto;
   background: #FFF;
@@ -674,6 +675,8 @@ main #content-hero {
   border: none;
   background-color: #D8D8D8;
   max-width: 100%;
+  transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 @media only screen and (min-width: 62rem) {
   .button_style {
@@ -808,7 +811,7 @@ main #content-hero {
   display: flex;
   flex-direction: column;
 }
-.page-single-photo #related .related-post ul li img {
+.page-single-photo #related .related-post ul li img.attachment-post-thumbnail {
   object-fit: cover;
   height: 590px;
   max-width: 100%;
@@ -850,6 +853,7 @@ main #content-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
 }
 @media only screen and (min-width: 62rem) {
   #menu-footer-menu {
@@ -894,7 +898,15 @@ main #content-hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 80px 0 40px 0;
+  flex-direction: column;
+  justify-content: center;
+  margin: 40px 0 40px 0;
+}
+@media only screen and (min-width: 62rem) {
+  #all-photos .filters {
+    margin: 80px 0 40px 0;
+    flex-direction: row;
+  }
 }
 #all-photos .filters .filters-left, #all-photos .filters .filters-right {
   display: flex;
@@ -908,6 +920,12 @@ main #content-hero {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
+  margin: 10px 0;
+}
+@media only screen and (min-width: 62rem) {
+  #all-photos .filters .filters-left .item, #all-photos .filters .filters-right .item {
+    margin: 0;
+  }
 }
 #all-photos .filters .filters-left .item::after, #all-photos .filters .filters-left .item::before, #all-photos .filters .filters-right .item::after, #all-photos .filters .filters-right .item::before {
   content: "";
@@ -963,10 +981,21 @@ main #content-hero {
 }
 #all-photos .filters .filters-left {
   flex: 1;
+  flex-direction: column;
+}
+@media only screen and (min-width: 62rem) {
+  #all-photos .filters .filters-left {
+    flex-direction: row;
+  }
 }
 #all-photos .filters .filters-right {
-  justify-content: end;
+  justify-content: center;
   flex: 1.5;
+}
+@media only screen and (min-width: 62rem) {
+  #all-photos .filters .filters-right {
+    justify-content: end;
+  }
 }
 #all-photos .photos-home {
   margin: 0 29px;
@@ -1029,6 +1058,11 @@ main #content-hero {
     margin-left: 10px;
   }
 }
+#all-photos .related_button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
 
 .photos-home li, .related-post li {
   position: relative;
@@ -1042,6 +1076,7 @@ main #content-hero {
   width: 100%;
   top: 0;
   left: 0;
+  transition: all 0.5s ease-out;
 }
 .photos-home li .hover_img .group, .related-post li .hover_img .group {
   display: flex;
@@ -1089,7 +1124,7 @@ main #content-hero {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 2000;
 }
 .lightbox article {

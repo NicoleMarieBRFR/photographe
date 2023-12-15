@@ -3,7 +3,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 80px 0 40px 0;
+        flex-direction: column;
+        justify-content: center;
+        margin: 40px 0 40px 0;
+        @include bp-min-computer {
+            margin: 80px 0 40px 0;
+            flex-direction: row;
+        }
         .filters-left, .filters-right {
             display: flex;
             align-items: center;
@@ -15,6 +21,10 @@
                     position: relative;
                     display: inline-block;
                     box-sizing: border-box;
+                    margin: 10px 0;
+                @include bp-min-computer {
+                    margin: 0;
+                }
                 &::after, &::before {
                     content: "";
                     position: absolute;
@@ -73,10 +83,17 @@
         }
         .filters-left {
             flex: 1;
+            flex-direction: column; 
+            @include bp-min-computer {
+                flex-direction: row;
+            }
         }
         .filters-right {
-            justify-content: end;
+            justify-content: center; 
             flex: 1.5;
+            @include bp-min-computer {
+                justify-content: end;
+            }
         }
     }
     .photos-home {
@@ -133,5 +150,10 @@
                 }
              }
         }
+    }
+    .related_button {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
     }
 }

@@ -48,7 +48,7 @@ while (have_posts()):
             <div class="lightbox_container">
                 <img class="lightbox_img" src="" alt="">
                 <div class="group">
-                    <p class="lightbox_date">
+                    <p class="lightbox_title">
                         <?php the_title(); ?>
                     </p>
                     <p class="lightbox_cat">

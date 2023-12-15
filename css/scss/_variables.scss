@@ -37,7 +37,7 @@ $widescreen-monitor-breakpoint	: 99rem; /*1584px*/
         @content;
     }
 }
-/*768px*/
+/*768px*/ 
 @mixin bp-max-tablet {
     @media only screen and (max-width: $tablet-breakpoint) {
         @content;

@@ -4,7 +4,7 @@
     
     if (is_page() && $post->post_name === 'home') {
         // Código a ser executado para a página home (slug 'home')
-        echo "Código para a página inicial (page-home.php)";
+        // echo "Código para a página inicial (page-home.php)";
 
         $loop = new WP_Query( array( 
             'post_type' => 'photo',
@@ -30,7 +30,7 @@
 
     } elseif ($args['type'] == 'single') {
         // Código a ser executado para a página single (slug 'single')
-        echo "Código para a página de detalhes (single-photo.php)";
+        // echo "Código para a página de detalhes (single-photo.php)";
         $category_slug = get_the_terms( get_the_ID(), 'categorie', false )[0]->slug;
         $loop = new WP_Query( array( 
             'post_type' => 'photo',

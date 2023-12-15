@@ -132,5 +132,77 @@ document.addEventListener("DOMContentLoaded", function() {
 
             //mudar somente para um nome depois de terminar a funçao
         });
+
+// LIGHTBOX
+        const links = Array.from(document.querySelectorAll('img[src$=".png"], img[src$=".jpg"], img[src$=".jpeg"]'))
+        const galery = links.map(link => link.getAttribute('src'))
+        links.forEach(link => link.addEventListener('click', e => {
+            e.preventDefault()
+        }))
+        console.log(galery);
+
+        // a classe pra ativar o lightbox
+        var lightbox = document.querySelector('.lightbox');  
+        // botao pra fechar
+        var closeLightbox = document.querySelector('.lightbox_close');  
+        // seleciona todos os botoes pra abrir o lightbox
+        var buttonlightbox = document.querySelectorAll('.button_lightbox');  
+        // quando o botao é clicado para cada elemento button e o index é a posiçao dos elementos no array
+        buttonlightbox.forEach(function(button, index) {
+          button.addEventListener('click', function(e){
+            e.preventDefault();        
+            // display lightbox
+            lightbox.style.display = 'block';
+        
+            generetedSlider(galery);
+          });
+        });
+
+        function generetedSlider(galery) {
+	
+            const imageGalery = document.querySelector(".lightbox_img");
+            imageGalery.src = galery[slideIndex];
+            
+            const catGalery = document.querySelector("lightbox_cat");
+            catGalery.innerHTML = galery[slideIndex];
+            
+            const titleGalery = document.querySelector("lightbox_title");
+            titleGalery.innerHTML = galery[slideIndex];
+            
+            console.log(slides[slideIndex].image);
+        }
+        
+        // botao de fechar
+        closeLightbox.onclick = function() {
+          lightbox.style.display = 'none';
+        };
+        
+        // Fleches
+        var flecheGauche = document.querySelector(".lightbox_left");
+        // var slideIndex = 0; em funçao do click
+        
+        flecheGauche.onclick = function () {
+            //variavel para ver onde esta o elemento
+            //parseInt para transformar o elemento string em numero inteiro do valor de um atributo ?
+            var slideIndex = parseInt(lightbox.getAttribute(''));
+            var flecheGaucheIndex = flecheGauche[slideIndex - 1];
+            if (flecheGaucheIndex === 0) {
+                lightbox.setAttribute('', slideIndex - 1);
+            }
+            else slideIndex--;
+        }
+        
+        var flecheDroite = document.querySelector(".lightbox_next");
+        
+        flecheDroite.onclick = function () {
+            var slideIndex = parseInt(lightbox.getAttribute(''));
+            var flecheDroiteIndex = flecheGauche[slideIndex + 1];
+            if (flecheDroiteIndex === slideIndex + 1) {
+                lightbox.setAttribute('', slideIndex + 0);
+            }
+            else slideIndex++;
+        }
+        generetedSlider(galery);
+
     });
 })(jQuery);
