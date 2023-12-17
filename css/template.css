@@ -1134,14 +1134,24 @@ main #content-hero {
   height: 100%;
   max-width: 564px;
   margin: 0 auto;
+  position: relative;
+  top: 15%;
 }
 .lightbox article .lightbox_container .group {
   display: flex;
   justify-content: space-between;
   width: 100%;
   color: #fff;
-  align-items: end;
   height: 85%;
+}
+.lightbox article .lightbox_container .img_item {
+  height: 565px;
+}
+.lightbox article .lightbox_container .img_item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
 .lightbox .lightbox_next, .lightbox .lightbox_prev, .lightbox .lightbox_close {
   border: none;

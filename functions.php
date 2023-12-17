@@ -112,11 +112,16 @@ function ajaxGallery() {
             }
             //para poder adicionar o template do lightbox
             ob_start();
+            get_template_part('templates_part/card_photo');
+            $cardBox_content = ob_get_clean();
+            $html .= $cardBox_content;
+            
+            $html .= '</li>';
+            //nao serve pra nada esse codigo
+            ob_start();
             get_template_part('templates_part/lightbox');
             $lightbox_content = ob_get_clean();
             $html .= $lightbox_content;
-
-            $html .= '</li>';
         }
     } else {
         wp_send_json_error( '' );

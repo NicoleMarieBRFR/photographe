@@ -134,7 +134,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
 // LIGHTBOX
-        const links = Array.from(document.querySelectorAll('img[src$=".png"], img[src$=".jpg"], img[src$=".jpeg"]'))
+        var slideIndex = 0;
+        const links = Array.from(document.querySelectorAll('.photos-home img[src$=".png"], .photos-home img[src$=".jpg"], .photos-home img[src$=".jpeg"]'));
         const galery = links.map(link => link.getAttribute('src'))
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
@@ -148,61 +149,68 @@ document.addEventListener("DOMContentLoaded", function() {
         // seleciona todos os botoes pra abrir o lightbox
         var buttonlightbox = document.querySelectorAll('.button_lightbox');  
         // quando o botao é clicado para cada elemento button e o index é a posiçao dos elementos no array
-        buttonlightbox.forEach(function(button, index) {
-          button.addEventListener('click', function(e){
-            e.preventDefault();        
-            // display lightbox
-            lightbox.style.display = 'block';
-        
-            generetedSlider(galery);
-          });
-        });
 
         function generetedSlider(galery) {
-	
             const imageGalery = document.querySelector(".lightbox_img");
-            imageGalery.src = galery[slideIndex];
-            
-            const catGalery = document.querySelector("lightbox_cat");
-            catGalery.innerHTML = galery[slideIndex];
-            
-            const titleGalery = document.querySelector("lightbox_title");
-            titleGalery.innerHTML = galery[slideIndex];
-            
-            console.log(slides[slideIndex].image);
-        }
+            const catGalery = document.querySelector(".lightbox_cat");
+            const titleGalery = document.querySelector(".lightbox_title");
         
+            // Certifique-se de que slideIndex está dentro dos limites do array
+            // Exibe a imagem
+            imageGalery.src = galery[slideIndex];
+    
+            // Exibe a categoria
+            const categories = links[slideIndex].getAttribute('data-categories');
+            catGalery.innerHTML = categories;
+    
+            // Exibe o título 
+            const title = links[slideIndex].getAttribute('data-title');
+            titleGalery.innerHTML = title;
+
+            console.log('slideIndex:', slideIndex);
+            console.log('galery[slideIndex]:', galery[slideIndex]);
+        }
+
+        buttonlightbox.forEach(function(button, index) {
+            button.addEventListener('click', function(e){
+              e.preventDefault();        
+              // display lightbox
+              lightbox.style.display = 'block';
+          
+              generetedSlider(galery);
+            });
+          });
+
+        const slideShow = galery[slideIndex];
+        // Botões de navegação
+        var flecheGauche = $('.lightbox_prev');
+        var flecheDroite = $('.lightbox_next');
+
+        // Quando o botão esquerdo é clicado
+        flecheGauche.on('click', function () {
+
+            if (slideIndex === 0) {
+                slideIndex = galery.length - 1
+            }
+            else slideIndex--;
+
+            generetedSlider(galery);
+        });
+
+        // Quando o botão direito é clicado
+        flecheDroite.on('click', function () {
+
+            if (slideIndex === galery.length - 1) {
+            slideIndex = 0
+            }
+            else slideIndex++;
+            generetedSlider(galery);
+        });
+
         // botao de fechar
         closeLightbox.onclick = function() {
           lightbox.style.display = 'none';
         };
-        
-        // Fleches
-        var flecheGauche = document.querySelector(".lightbox_left");
-        // var slideIndex = 0; em funçao do click
-        
-        flecheGauche.onclick = function () {
-            //variavel para ver onde esta o elemento
-            //parseInt para transformar o elemento string em numero inteiro do valor de um atributo ?
-            var slideIndex = parseInt(lightbox.getAttribute(''));
-            var flecheGaucheIndex = flecheGauche[slideIndex - 1];
-            if (flecheGaucheIndex === 0) {
-                lightbox.setAttribute('', slideIndex - 1);
-            }
-            else slideIndex--;
-        }
-        
-        var flecheDroite = document.querySelector(".lightbox_next");
-        
-        flecheDroite.onclick = function () {
-            var slideIndex = parseInt(lightbox.getAttribute(''));
-            var flecheDroiteIndex = flecheGauche[slideIndex + 1];
-            if (flecheDroiteIndex === slideIndex + 1) {
-                lightbox.setAttribute('', slideIndex + 0);
-            }
-            else slideIndex++;
-        }
-        generetedSlider(galery);
 
     });
 })(jQuery);

@@ -59,12 +59,29 @@
                 echo '<li>';
                 if (has_post_thumbnail()) {
                     // Affichez l'image en vedette
-                    $thumbnail = get_the_post_thumbnail();
+
+                    $categories = get_the_terms(get_the_ID(), 'categorie');
+                    if ($categories && !is_wp_error($categories)) {
+                        $category_names = array();
+                        foreach ($categories as $category) {
+                            $category_names[] = $category->name;
+                        }
+                        $resultat = implode(', ', $category_names);
+                    }
+
+                    $titreImg = get_the_title(); //corrigir isso depois
+
+                    $thumbnail = get_the_post_thumbnail (null, 'post-thumbnail', [
+                        'data-categories' => $resultat,
+                        'data-title' => $titreImg
+                    ]);
+
                     echo '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
+                    echo get_template_part('templates_part/card_photo');
                 }
-                echo get_template_part('templates_part/lightbox');
                 echo '</li>';
             }
+            echo get_template_part('templates_part/lightbox');
             echo '</ul>';
         } else {
             esc_html_e( 'Aucun article correspondant trouvé.' );

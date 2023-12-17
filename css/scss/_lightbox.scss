@@ -75,13 +75,23 @@
             height: 100%;
             max-width: 564px;
             margin: 0 auto;
+            position: relative;
+            top: 15%;
             .group {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
                 color: #fff;
-                align-items: end;
                 height: 85%;
+            }
+            .img_item {
+                height: 565px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    -o-object-fit: cover;
+                    object-fit: cover; 
+                }
             }
         }
     }
