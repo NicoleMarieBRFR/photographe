@@ -129,6 +129,6 @@ function ajaxGallery() {
     // 4. On réinitialise à la requête principale (important)
     wp_reset_postdata();
 
-  	// Envoyer les données au navigateur
+  	// Envoyer les données au navigateur 
 	wp_send_json_success( $html );
 }
