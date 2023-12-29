@@ -75,8 +75,9 @@
                         </section>
                         <section id="related">
                             <h2 class="m-rp"> Vous aimerez aussi </h2>
-                            <div class="related-post">
+                            <div class="related-post photo_items">
                                 <?php get_template_part('templates_part/photo_block', 'photo', array('type'=>'single')); ?>
+                                <?php get_template_part('templates_part/lightbox'); ?>
                             </div>
                             <div class="related_button m-rp">
                                 <button class="button_style">Toute les photos</button>

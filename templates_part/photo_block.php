@@ -81,7 +81,6 @@
                 }
                 echo '</li>';
             }
-            echo get_template_part('templates_part/lightbox');
             echo '</ul>';
         } else {
             esc_html_e( 'Aucun article correspondant trouvé.' );

@@ -116,9 +116,10 @@
     
                     </div>
                     
-                    <div class="photos-home">
+                    <div class="photos-home photo_items">
                         <?php get_template_part('templates_part/photo_block'); ?>
                     </div>
+                    <?php get_template_part('templates_part/lightbox'); ?>
                     <div class="related_button m-rp">
                         <button class="button_style" data-ajaxurl="<?php echo admin_url( 'admin-ajax.php' ); ?>" >Charger plus</button>
                     </div>

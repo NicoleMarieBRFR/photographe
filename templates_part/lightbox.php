@@ -13,23 +13,12 @@
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <div class="lightbox_container">
             <div class="img_item">
-                <img class="lightbox_img" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
+                <img class="lightbox_img" src="" alt="">
             </div>
             <div class="group">
-                <p class="lightbox_title"><?php the_title(); ?></p>
+                <p class="lightbox_title"></p>
                 
-                <p class="lightbox_cat">
-                    <?php
-                    $categories = get_the_terms(get_the_ID(), 'categorie');
-                    if ($categories && !is_wp_error($categories)) {
-                        $category_names = array();
-                        foreach ($categories as $category) {
-                            $category_names[] = $category->name;
-                        }
-                        echo implode(', ', $category_names);
-                    }
-                    ?>  
-                </p>
+                <p class="lightbox_cat"></p>
             </div>
         </div>
     </article>

@@ -429,6 +429,7 @@ body {
     opacity: 1;
     background-color: transparent;
     height: initial;
+    display: block;
   }
 }
 .top-bar .main-menu ul li {

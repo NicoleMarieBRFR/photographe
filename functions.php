@@ -107,7 +107,21 @@ function ajaxGallery() {
             $html .= '<li>';
             if (has_post_thumbnail()) {
                 // Affichez l'image en vedette
-                $thumbnail = get_the_post_thumbnail();
+                $categories = get_the_terms(get_the_ID(), 'categorie');
+                    if ($categories && !is_wp_error($categories)) {
+                        $category_names = array();
+                        foreach ($categories as $category) {
+                            $category_names[] = $category->name;
+                        }
+                        $resultat = implode(', ', $category_names);
+                    }
+
+                    $titreImg = get_the_title(); //corrigir isso depois
+                    
+                $thumbnail = get_the_post_thumbnail (null, 'post-thumbnail', [
+                    'data-categories' => $resultat,
+                    'data-title' => $titreImg
+                ]);
                 $html .= '<a href="' . esc_url(get_permalink()) . '">' . $thumbnail . '</a>';
             }
             //para poder adicionar o template do lightbox
@@ -117,11 +131,6 @@ function ajaxGallery() {
             $html .= $cardBox_content;
             
             $html .= '</li>';
-            //nao serve pra nada esse codigo
-            ob_start();
-            get_template_part('templates_part/lightbox');
-            $lightbox_content = ob_get_clean();
-            $html .= $lightbox_content;
         }
     } else {
         wp_send_json_error( '' );

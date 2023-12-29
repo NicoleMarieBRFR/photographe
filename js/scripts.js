@@ -61,9 +61,48 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
 // CODIGO NOVO MISTURA DOS DOIS BUTTON E FILTROS
 (function ($) {
     $(document).ready(function () {
+
+        
+        // a classe pra ativar o lightbox
+        var lightbox = document.querySelector('.lightbox');
+        var links, galery, catGalery, titleGalery; 
+        
+        function initializeGallery() {
+            links = Array.from(document.querySelectorAll('.photo_items img[src$=".png"], .photo_items img[src$=".jpg"], .photo_items img[src$=".jpeg"]'));
+            
+            if (links.length === 0) {
+                // Se não houver links, não execute o restante da lógica
+                return;
+            }
+            
+            galery = links.map(link => link.getAttribute('src'))
+            links.forEach(link => link.addEventListener('click', e => {
+                e.preventDefault()
+            }))
+
+            catGalery = document.querySelector(".lightbox_cat");
+            titleGalery = document.querySelector(".lightbox_title");
+        }
+        // abrir lightbox
+        function openLightbox() {
+            // seleciona todos os botoes pra abrir o lightbox
+            var buttonlightbox = document.querySelectorAll('.button_lightbox'); 
+        
+            buttonlightbox.forEach(function(button, index) {
+                button.addEventListener('click', function(e){
+                    e.preventDefault();        
+                    // display lightbox
+                    lightbox.style.display = 'block';
+                
+                    generetedSlider(galery, index);
+                });
+            });
+        }
+
         let currentPage = 1; // Inicie em 0 para a primeira carga
 
         function loadContent(action, paged, categorie, format, triDate, ajaxurl) {
@@ -87,12 +126,16 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.log(response.data);
 
                     // Adiciona as novas fotos à lista existente
-                    $(".photos-home ul").append(response.data);
-
+                    $(".photos-home ul").append(response.data);                    
+                    
                     if (!response.success || response.data.trim() === "") {
                         $('.button_style').hide(); // Oculta o botão se não houver mais conteúdo
                         return;
                     }
+                    //return esse resultado
+                    initializeGallery();
+                    openLightbox();
+
                     currentPage++;  // Incrementa a página após o AJAX ser bem-sucedido e houver mais conteúdo
                     console.log(currentPage);
                 },
@@ -101,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         }
+        initializeGallery();
 
         // Carregar via filtros
         $('#cat, #format, #triDate').on('change', function (e) {
@@ -134,52 +178,40 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
 // LIGHTBOX
-        var slideIndex = 0;
-        const links = Array.from(document.querySelectorAll('.photos-home img[src$=".png"], .photos-home img[src$=".jpg"], .photos-home img[src$=".jpeg"]'));
-        const galery = links.map(link => link.getAttribute('src'))
-        links.forEach(link => link.addEventListener('click', e => {
-            e.preventDefault()
-        }))
-        console.log(galery);
-
-        // a classe pra ativar o lightbox
-        var lightbox = document.querySelector('.lightbox');  
+        var slideIndex;
         // botao pra fechar
-        var closeLightbox = document.querySelector('.lightbox_close');  
-        // seleciona todos os botoes pra abrir o lightbox
-        var buttonlightbox = document.querySelectorAll('.button_lightbox');  
+        var closeLightbox = document.querySelector('.lightbox_close');   
         // quando o botao é clicado para cada elemento button e o index é a posiçao dos elementos no array
 
-        function generetedSlider(galery) {
+        //aqui
+        // var links = Array.from(document.querySelectorAll('.photos-home img[src$=".png"], .photos-home img[src$=".jpg"], .photos-home img[src$=".jpeg"]'));
+        // var galery = links.map(link => link.getAttribute('src'))
+        // links.forEach(link => link.addEventListener('click', e => {
+        //     e.preventDefault()
+        // }))
+
+        function generetedSlider(galery, index) {
+            slideIndex = index;
             const imageGalery = document.querySelector(".lightbox_img");
-            const catGalery = document.querySelector(".lightbox_cat");
-            const titleGalery = document.querySelector(".lightbox_title");
+            // const catGalery = document.querySelector(".lightbox_cat");
+            // const titleGalery = document.querySelector(".lightbox_title");
         
             // Certifique-se de que slideIndex está dentro dos limites do array
             // Exibe a imagem
-            imageGalery.src = galery[slideIndex];
+            imageGalery.src = galery[index];
     
             // Exibe a categoria
-            const categories = links[slideIndex].getAttribute('data-categories');
+            const categories = links[index].getAttribute('data-categories');
             catGalery.innerHTML = categories;
     
             // Exibe o título 
-            const title = links[slideIndex].getAttribute('data-title');
+            const title = links[index].getAttribute('data-title');
             titleGalery.innerHTML = title;
 
-            console.log('slideIndex:', slideIndex);
-            console.log('galery[slideIndex]:', galery[slideIndex]);
+            console.log('galery[slideIndex]:', galery[index]);
         }
 
-        buttonlightbox.forEach(function(button, index) {
-            button.addEventListener('click', function(e){
-              e.preventDefault();        
-              // display lightbox
-              lightbox.style.display = 'block';
-          
-              generetedSlider(galery);
-            });
-          });
+        openLightbox();
 
         const slideShow = galery[slideIndex];
         // Botões de navegação
@@ -194,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             else slideIndex--;
 
-            generetedSlider(galery);
+            generetedSlider(galery, slideIndex);
         });
 
         // Quando o botão direito é clicado
@@ -204,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
             slideIndex = 0
             }
             else slideIndex++;
-            generetedSlider(galery);
+            generetedSlider(galery, slideIndex);
         });
 
         // botao de fechar
